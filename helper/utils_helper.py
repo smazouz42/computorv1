@@ -19,6 +19,10 @@ def parse_equation(equation):
     left_terms = parse_terms(parts[0])
     right_terms = parse_terms(parts[1])
     
+    print("-"*35)
+    print(f"| {purpel}Move all the items to one side.{reset} |")
+    print("-"*35)
+
     combined_terms = combine_terms(left_terms, right_terms)
     
     return combined_terms

@@ -4,16 +4,11 @@ from helper.colors import red, yellow
 from helper.utils_helper import *
 
 
-
-green = '\033[92m'
-red = '\033[91m'
-yellow = '\033[93m'
-reset = '\033[0m'
-purpel = '\033[95m'
-
-
 def solve_equation(combined_terms, degree):
-    
+    print("-"*47)
+    print(f"| {purpel}Solve the equation depending on the degree.{reset} |")
+    print("-"*47)
+
     if degree == 2:
         a = combined_terms.get(2, 0)
         b = combined_terms.get(1, 0)
@@ -39,19 +34,19 @@ def solve_equation(combined_terms, degree):
         c = combined_terms.get(0, 0)
         if b != 0:
             root = -c / b
-            print(f"The solution is:\n{root}")
+            print(f"{yellow}The solution is:{reset}\n{root}")
             if -c % b != 0:
                 custom_fraction(-c,b)
 
         else:
-            print("No solution.")
+            print("{yellow}No solution.{reset}")
     
     elif degree == 0:
         c = combined_terms.get(0, 0)
         if c == 0:
-            print("All real numbers are solutions.")
+            print("{yellow}All real numbers are solutions.{reset}")
         else:
-            print("No solution.")
+            print("{yellow}No solution.{reset}")
             
 if __name__ == "__main__":
     
@@ -63,8 +58,12 @@ if __name__ == "__main__":
     try:
         combined_terms = parse_equation(equation)
         reduced_form = reduce_equation(combined_terms)
-    
+
         print(f"{yellow}Reduced form{reset}: {reduced_form} = 0")
+        print("-"*18)
+        print(f"| {purpel}Get the degree{reset} |")
+        print("-"*18)
+
         degree = max(combined_terms.keys())
         print(f"{yellow}Polynomial degree{reset}: {degree}")
     
