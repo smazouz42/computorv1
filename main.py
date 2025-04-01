@@ -13,6 +13,7 @@ def solve_equation(combined_terms, degree):
         a = combined_terms.get(2, 0)
         b = combined_terms.get(1, 0)
         c = combined_terms.get(0, 0)
+        print(f"{yellow}a = {a} b = {b} c = {c}{reset}")
         discriminant = b*b - 4*a*c
         if discriminant > 0:
             root1 = (-b + _sqrt(discriminant)) / (2*a)
@@ -27,11 +28,12 @@ def solve_equation(combined_terms, degree):
             root = -b / (2*a)
             print(f"{yellow}Discriminant is zero, the solution is:{reset}\n{root:.6f}")
         else:
-            print(f"{yellow}Discriminant is strictly negative, no real solutions.{reset:.6f}")
+            print(f"{yellow}Discriminant is strictly negative, no real solutions.{reset}")
     
     elif degree == 1:
         b = combined_terms.get(1, 0)
         c = combined_terms.get(0, 0)
+        print(f"{yellow}b = {b} c = {c}{reset}")
         if b != 0:
             root = -c / b
             print(f"{yellow}The solution is:{reset}\n{root}")

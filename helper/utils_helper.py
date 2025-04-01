@@ -18,6 +18,10 @@ def parse_equation(equation):
     
     left_terms = parse_terms(parts[0])
     right_terms = parse_terms(parts[1])
+    if not left_terms:
+        raise ValueError("No terms found on the left side of the equation.")
+    if not right_terms:
+        raise ValueError("No terms found on the right side of the equation.")
     
     print("-"*35)
     print(f"| {purpel}Move all the items to one side.{reset} |")
@@ -27,17 +31,36 @@ def parse_equation(equation):
     
     return combined_terms
 
+def normalize_signs(part):
+    new_part = ""
+    signs = ""
+    for i in range(len(part)):
+        if part[i] == "+":
+            signs += "+"
+        elif part[i] == "-":
+            signs += "-"
+        else:
+            
+            if signs:
+                if signs.count("-") % 2 == 0:
+                    new_part += "+"
+                else:
+                    new_part += "-"
+            new_part += part[i]
+            signs = ""
+    return new_part
+                    
+    
 def parse_terms(part):
     part = part.replace(" " , "")
-    
-    if part == "":
-        return {0: 0}
-
+    part = normalize_signs(part)
     term_items = re.split(r'(?=[+-])', part)
     term_pattern = re.compile(r'([+-]?\d*(\.\d+)?)\*?X?(\^(\d+))?')
     
     term_dict = {}
     for item in term_items:
+        if not item:
+            continue
         match = term_pattern.fullmatch(item)
         if match:
             coefficient = match.group(1)      
